@@ -1039,7 +1039,7 @@ impl<V: Vector> Mask<V> {
     unsafe fn members1(chunk: V, masks: [Mask<V>; 1]) -> V {
         let lomask = V::splat(0xF);
         let hlo = chunk.and(lomask);
-        let hhi = chunk.shift_8bit_lane_right::<4>().and(lomask);
+        let hhi = chunk.shift_8bit_lane_right::<4>();
         let locand = masks[0].lo.shuffle_bytes(hlo);
         let hicand = masks[0].hi.shuffle_bytes(hhi);
         locand.and(hicand)
@@ -1066,7 +1066,7 @@ impl<V: Vector> Mask<V> {
     unsafe fn members2(chunk: V, masks: [Mask<V>; 2]) -> (V, V) {
         let lomask = V::splat(0xF);
         let hlo = chunk.and(lomask);
-        let hhi = chunk.shift_8bit_lane_right::<4>().and(lomask);
+        let hhi = chunk.shift_8bit_lane_right::<4>();
 
         let locand1 = masks[0].lo.shuffle_bytes(hlo);
         let hicand1 = masks[0].hi.shuffle_bytes(hhi);
@@ -1101,7 +1101,7 @@ impl<V: Vector> Mask<V> {
     unsafe fn members3(chunk: V, masks: [Mask<V>; 3]) -> (V, V, V) {
         let lomask = V::splat(0xF);
         let hlo = chunk.and(lomask);
-        let hhi = chunk.shift_8bit_lane_right::<4>().and(lomask);
+        let hhi = chunk.shift_8bit_lane_right::<4>();
 
         let locand1 = masks[0].lo.shuffle_bytes(hlo);
         let hicand1 = masks[0].hi.shuffle_bytes(hhi);
@@ -1140,7 +1140,7 @@ impl<V: Vector> Mask<V> {
     unsafe fn members4(chunk: V, masks: [Mask<V>; 4]) -> (V, V, V, V) {
         let lomask = V::splat(0xF);
         let hlo = chunk.and(lomask);
-        let hhi = chunk.shift_8bit_lane_right::<4>().and(lomask);
+        let hhi = chunk.shift_8bit_lane_right::<4>();
 
         let locand1 = masks[0].lo.shuffle_bytes(hlo);
         let hicand1 = masks[0].hi.shuffle_bytes(hhi);
