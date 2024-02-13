@@ -413,7 +413,7 @@ mod x86_64_ssse3 {
 mod x86_64_avx2 {
     use core::arch::x86_64::*;
 
-    use crate::util::int::{I32, I64, I8};
+    use crate::util::int::{I64, I8};
 
     use super::{FatVector, Vector};
 
@@ -433,8 +433,7 @@ mod x86_64_avx2 {
 
         #[inline(always)]
         unsafe fn is_zero(self) -> bool {
-            let cmp = self.cmpeq(Self::splat(0));
-            _mm256_movemask_epi8(cmp).to_bits() == 0xFFFFFFFF
+            _mm256_testz_si256(self, self) == 1
         }
 
         #[inline(always)]
